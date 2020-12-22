@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { cityName } from "./api/fetchCityname";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [query, setQuery] = useState("");
+  const search = async (e) => {
+    if (e.key === "Enter") {
+      const data = await cityName(query);
+      console.log(data);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="mainContainer">
+      <input
+        type="text"
+        className="From"
+        placeholder="From"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyPress={search}
+      />
     </div>
   );
-}
+};
 
 export default App;
