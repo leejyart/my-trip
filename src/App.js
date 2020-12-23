@@ -33,7 +33,7 @@ const App = () => {
 
   //make dropdown container to be hidden
   function ToggleDisable() {
-    setFilteredFrom("");
+    // setFilteredFrom("");
     setFilteredTo("");
   }
 
@@ -97,7 +97,6 @@ const App = () => {
               onChange={(e) => filterCities(e)}
               onBlur={ToggleDisable}
             />
-
             {filteredFrom && (
               <DestinationFromToggle>
                 {filteredFrom.map((el) => (
