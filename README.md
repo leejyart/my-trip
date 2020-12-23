@@ -1,70 +1,18 @@
-# Getting Started with Create React App
+#TASKS:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+✔️ 1. Create a new PWA (progressive web app) project in ReactJs.
+✔️ 2. Make a minimalist page using styled-components (colors and animations of your choice) having:
+-The title "My Trip" and a logo of your choice at the very top center of the page.
+-A background image covering the whole screen view.
+(You may take a quick look to these sites for inspiration: https://www.airbnb.com/ and https://www.starlink.com/)
+✔️ 3. The page must have as the main contain a form for visitors to insert 3 things only:
+Two input fields to search name of Origin and Destination airport. The inputs should have an auto-complete functionality. Use any free API of your choice to retrieve city names.
+An input to put Your Email address.
+A Submit button.
+✔️ 4. Make sure the user fillout the 3 inputs, otherwise the Submit button must not be activated.
+✔️ 5. Make sure to do proper text and email **format validation** for the 3 inputs.
+6. The action of the Submit button must be a registration to an Email API of your choice (we recommend the Sendgrid free plan).
+7. After the email of the user is registered successfully take the user to a New page saying: "Congratulations, your email has been registered."
+(-ing) 8. Add some CSS dynamic render features to the page. The page must look equally good Regardless of the screen size (mobile or web).
+(-ing) 9. Save user cache (cookies) information. If the user returns to your page fillout the input fields automatically.
+(-ing) 10. Make user the user can download/install your PWA website in the mobile device.
