@@ -15,4 +15,4 @@ A Submit button.
 7. After the email of the user is registered successfully take the user to a New page saying: "Congratulations, your email has been registered."
 (-ing) 8. Add some CSS dynamic render features to the page. The page must look equally good Regardless of the screen size (mobile or web).
 (-ing) 9. Save user cache (cookies) information. If the user returns to your page fillout the input fields automatically.
-(-ing) 10. Make user the user can download/install your PWA website in the mobile device.
+(-ing) 10. Make user the user can download/install your PWA website in the mobile device .
