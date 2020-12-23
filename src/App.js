@@ -33,7 +33,7 @@ const App = () => {
 
   //make dropdown container to be hidden
   function ToggleDisable() {
-    // setFilteredFrom("");
+    setFilteredFrom("");
     setFilteredTo("");
   }
 
