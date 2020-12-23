@@ -42,11 +42,10 @@ const App = () => {
     console.log(filteredFrom, filteredTo);
     const { name, value } = e.target;
     console.log(name, value);
-    if (value === "") {
-      setEmail("");
-      setFilteredFrom("");
-      setFilteredTo("");
-    }
+    if (value === "") setEmail("");
+    setFilteredFrom("");
+    setFilteredTo("");
+
     const apca = autocomplete({
       key: "638ca08efd",
       secret: "c7aab2020d0a956",
