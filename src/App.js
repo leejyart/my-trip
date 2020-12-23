@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styled, { withTheme } from "styled-components";
+import styled from "styled-components";
 import { autocomplete } from "air-port-codes-node";
-import { cityName } from "./api/fetchCityname";
-import "./App.css";
 
 const App = () => {
   const [from, setFrom] = useState("");
@@ -10,6 +8,7 @@ const App = () => {
   const [to, setTo] = useState("");
   const [filteredTo, setFilteredTo] = useState("");
   const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(true);
   const [characterNumberValid, setCharacterNumberValid] = useState(false);
 
   //3 characters validation function
@@ -20,6 +19,17 @@ const App = () => {
       setCharacterNumberValid(false);
     }
   }, [email, to, from]);
+
+  //email validation
+  useEffect(() => {
+    console.log("email change", email);
+    const reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    if (reg.test(email)) {
+      setValidEmail(true);
+    } else {
+      setValidEmail(false);
+    }
+  }, [email]);
 
   //make dropdown container to be hidden
   function ToggleDisable() {
@@ -33,8 +43,6 @@ const App = () => {
     const { name, value } = e.target;
     console.log(name, value);
     if (value === "") {
-      setFrom("");
-      setTo("");
       setEmail("");
       setFilteredFrom("");
       setFilteredTo("");
@@ -75,14 +83,21 @@ const App = () => {
         <h1>My trip </h1>
       </div>
       <InputContainer>
-        <div>
+        <div className="destinationContainer">
           <inputFromContainer>
+            {0 < from.length && from.length < 3 && (
+              <div className="alarm message">
+                "the characters needs to be more than 3"
+              </div>
+            )}
             <DestinationFrom
+              autoComplete="off"
               name="from"
               placeholder="from"
               onChange={(e) => filterCities(e)}
               onBlur={ToggleDisable}
             />
+
             {filteredFrom && (
               <DestinationFromToggle>
                 {filteredFrom.map((el) => (
@@ -95,7 +110,13 @@ const App = () => {
           </inputFromContainer>
           <div className="arrow">➤</div>
           <inputToContainer>
+            {0 < to.length && to.length < 3 && (
+              <div className="alarm message">
+                "the characters needs to be more than 3"
+              </div>
+            )}
             <DestinationTo
+              autoComplete="off"
               name="to"
               placeholder="to"
               onChange={(e) => filterCities(e)}
@@ -112,11 +133,17 @@ const App = () => {
             )}
           </inputToContainer>
         </div>
+        {!validEmail && email.length > 0 && (
+          <div className="alarm message">
+            this is not an correct e-mail format
+          </div>
+        )}
         <input
           type="text"
           className="emailInput"
           placeholder="your email address"
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="off"
         />
         <Button
           characterNumberValid={characterNumberValid}
@@ -165,6 +192,11 @@ export const InputContainer = styled.div`
   justify-content: center;
   align-items: center;
 
+  .destinationContainer {
+    padding-bottom: 0;
+    height: 60px;
+  }
+
   input {
     width: 300px;
     height: 30px;
@@ -181,6 +213,14 @@ export const InputContainer = styled.div`
   .arrow {
     color: white;
     padding: 10px 0;
+  }
+
+  .alarm {
+    padding-bottom: 0;
+    padding-left: 70px;
+    color: red;
+    font-weight: bold;
+    font-size: 10px;
   }
 `;
 
