@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { withTheme } from "styled-components";
 import { autocomplete } from "air-port-codes-node";
 import { cityName } from "./api/fetchCityname";
 import "./App.css";
@@ -10,18 +10,32 @@ const App = () => {
   const [to, setTo] = useState("");
   const [filteredTo, setFilteredTo] = useState("");
   const [email, setEmail] = useState("");
+  const [characterNumberValid, setCharacterNumberValid] = useState(false);
 
+  //3 characters validation function
+  useEffect(() => {
+    if (email.length >= 3 && to.length >= 3 && from.length >= 3) {
+      setCharacterNumberValid(true);
+    } else {
+      setCharacterNumberValid(false);
+    }
+  }, [email, to, from]);
+
+  //make dropdown container to be hidden
   function ToggleDisable() {
     setFilteredFrom("");
     setFilteredTo("");
   }
 
-  // Api from APC
+  // fetching API from APC function
   function filterCities(e) {
     console.log(filteredFrom, filteredTo);
     const { name, value } = e.target;
     console.log(name, value);
     if (value === "") {
+      setFrom("");
+      setTo("");
+      setEmail("");
       setFilteredFrom("");
       setFilteredTo("");
     }
@@ -34,13 +48,17 @@ const App = () => {
     apca.request(value);
 
     if (name === "from") {
+      setFrom(value);
+      //if succeed to fetch data
       apca.onSuccess = (data) => {
         setFilteredFrom(data.airports);
       };
+      //if failed to fetch data
       apca.onError = (data) => {
         console.log("onError", data.message);
       };
     } else {
+      setTo(value);
       apca.onSuccess = (data) => {
         setFilteredTo(data.airports);
       };
@@ -68,7 +86,9 @@ const App = () => {
             {filteredFrom && (
               <DestinationFromToggle>
                 {filteredFrom.map((el) => (
-                  <div>{el.name}</div>
+                  <div>
+                    {el.iata}_{el.name}
+                  </div>
                 ))}
               </DestinationFromToggle>
             )}
@@ -85,7 +105,7 @@ const App = () => {
               <DestinationToToggle>
                 {filteredTo.map((el) => (
                   <div>
-                    {el.iata}+{el.name}
+                    {el.iata}_{el.name}
                   </div>
                 ))}
               </DestinationToToggle>
@@ -98,7 +118,12 @@ const App = () => {
           placeholder="your email address"
           onChange={(e) => setEmail(e.target.value)}
         />
-        <button>Submit</button>
+        <Button
+          characterNumberValid={characterNumberValid}
+          disabled={characterNumberValid}
+        >
+          Submit
+        </Button>
       </InputContainer>
     </Container>
   );
@@ -146,12 +171,6 @@ export const InputContainer = styled.div`
     text-align: center;
   }
 
-  button {
-    margin-top: 15px;
-    width: 80px;
-    height: 30px;
-  }
-
   div {
     display: flex;
     justify-content: space-between;
@@ -179,10 +198,11 @@ export const DestinationFromToggle = styled.div`
   flex-direction: column;
 
   div {
-    width: 300px;
-    border: solid lightgray 1px;
+    border-radius: 3;
+    padding: 3px 10px;
+    width: 285px;
     height: 25px;
-    padding: 0;
+    border: solid lightgray 1px;
     background-color: white;
     color: black;
     &:hover {
@@ -195,23 +215,34 @@ export const DestinationTo = styled.input`
   type: "text";
   border: 1px solid grey;
   margin-left: 15px;
+  position: relative;
 `;
 
 export const DestinationToToggle = styled.div`
-  width: 300px;
   position: absolute;
   display: flex;
   flex-direction: column;
-
+  margin-left: 15px;
   div {
-    width: 300px;
+    border-radius: 3;
+    padding: 3px 10px;
+    width: 285px;
+    height: 25px;
     border: solid lightgray 1px;
-    height: 20px;
-    padding-left: 10px;
     background-color: white;
     color: black;
     &:hover {
       background-color: lightgray;
     }
   }
+`;
+
+export const Button = styled.button`
+  border-radius: 10px;
+  margin-top: 15px;
+  width: 80px;
+  height: 30px;
+  color: white;
+  background-color: ${({ characterNumberValid }) =>
+    characterNumberValid ? "red" : "grey"};
 `;
